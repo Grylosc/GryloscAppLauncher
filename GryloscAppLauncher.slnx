@@ -2,6 +2,7 @@
   <Configurations>
     <Platform Name="Any CPU" />
     <Platform Name="x64" />
+    <Platform Name="x86" />
   </Configurations>
   <Project Path="GryloscAppLauncher/GryloscAppLauncher.csproj">
     <Platform Solution="*|x64" Project="x64" />

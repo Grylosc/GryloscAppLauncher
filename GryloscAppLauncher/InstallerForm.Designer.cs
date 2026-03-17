@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstallerForm));
             RepoListBox = new ListBox();
             AddSoftwareButton = new Button();
             IconBox = new PictureBox();
             SoftTitle = new LinkLabel();
             StatusText = new Label();
+            VersionText = new Label();
             ((System.ComponentModel.ISupportInitialize)IconBox).BeginInit();
             SuspendLayout();
             // 
@@ -75,7 +77,7 @@
             SoftTitle.Font = new Font("Yu Gothic UI", 15F);
             SoftTitle.Location = new Point(583, 12);
             SoftTitle.Name = "SoftTitle";
-            SoftTitle.Size = new Size(205, 150);
+            SoftTitle.Size = new Size(205, 94);
             SoftTitle.TabIndex = 5;
             SoftTitle.TabStop = true;
             SoftTitle.Text = "Not Selected";
@@ -90,16 +92,29 @@
             StatusText.TabIndex = 6;
             StatusText.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // VersionText
+            // 
+            VersionText.Font = new Font("Yu Gothic UI", 13F);
+            VersionText.Location = new Point(583, 106);
+            VersionText.Name = "VersionText";
+            VersionText.Size = new Size(205, 56);
+            VersionText.TabIndex = 13;
+            VersionText.Text = "Not Selected";
+            VersionText.TextAlign = ContentAlignment.MiddleRight;
+            VersionText.UseMnemonic = false;
+            // 
             // InstallerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(VersionText);
             Controls.Add(StatusText);
             Controls.Add(SoftTitle);
             Controls.Add(IconBox);
             Controls.Add(AddSoftwareButton);
             Controls.Add(RepoListBox);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InstallerForm";
             Text = "GryloscAppLauncher";
             Shown += InstallerForm_Shown;
@@ -114,5 +129,6 @@
         private PictureBox IconBox;
         private LinkLabel SoftTitle;
         private Label StatusText;
+        private Label VersionText;
     }
 }

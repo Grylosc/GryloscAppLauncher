@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             SoftListBox = new ListBox();
             AddSoftwareButton = new Button();
             UninstallButton = new Button();
@@ -40,6 +41,9 @@
             IconBox = new PictureBox();
             SearchBox = new TextBox();
             label1 = new Label();
+            UpdateButton = new Button();
+            VersionText = new Label();
+            StatusText = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IconBox).BeginInit();
             SuspendLayout();
@@ -121,7 +125,7 @@
             // ResetTSMI
             // 
             ResetTSMI.Name = "ResetTSMI";
-            ResetTSMI.Size = new Size(180, 22);
+            ResetTSMI.Size = new Size(108, 22);
             ResetTSMI.Text = "リセット";
             ResetTSMI.Click += ResetTSMI_Click;
             // 
@@ -131,7 +135,7 @@
             SoftTitle.Font = new Font("Yu Gothic UI", 15F);
             SoftTitle.Location = new Point(537, 40);
             SoftTitle.Name = "SoftTitle";
-            SoftTitle.Size = new Size(205, 100);
+            SoftTitle.Size = new Size(205, 64);
             SoftTitle.TabIndex = 7;
             SoftTitle.TabStop = true;
             SoftTitle.Text = "Not Selected";
@@ -166,11 +170,46 @@
             label1.TabIndex = 9;
             label1.Text = "検索";
             // 
+            // UpdateButton
+            // 
+            UpdateButton.Enabled = false;
+            UpdateButton.Location = new Point(664, 143);
+            UpdateButton.Name = "UpdateButton";
+            UpdateButton.Size = new Size(75, 23);
+            UpdateButton.TabIndex = 10;
+            UpdateButton.Text = "更新";
+            UpdateButton.UseVisualStyleBackColor = true;
+            UpdateButton.Visible = false;
+            UpdateButton.Click += UpdateButton_Click;
+            // 
+            // VersionText
+            // 
+            VersionText.Font = new Font("Yu Gothic UI", 13F);
+            VersionText.Location = new Point(537, 114);
+            VersionText.Name = "VersionText";
+            VersionText.Size = new Size(205, 26);
+            VersionText.TabIndex = 11;
+            VersionText.Text = "Not Selected";
+            VersionText.TextAlign = ContentAlignment.MiddleRight;
+            VersionText.UseMnemonic = false;
+            // 
+            // StatusText
+            // 
+            StatusText.Font = new Font("Yu Gothic UI", 15F);
+            StatusText.Location = new Point(427, 231);
+            StatusText.Name = "StatusText";
+            StatusText.Size = new Size(312, 32);
+            StatusText.TabIndex = 12;
+            StatusText.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(751, 450);
+            Controls.Add(StatusText);
+            Controls.Add(VersionText);
+            Controls.Add(UpdateButton);
             Controls.Add(label1);
             Controls.Add(SearchBox);
             Controls.Add(SoftTitle);
@@ -181,6 +220,7 @@
             Controls.Add(AddSoftwareButton);
             Controls.Add(SoftListBox);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "GryloscAppLauncher";
@@ -206,5 +246,8 @@
         private PictureBox IconBox;
         private TextBox SearchBox;
         private Label label1;
+        private Button UpdateButton;
+        private Label VersionText;
+        private Label StatusText;
     }
 }
