@@ -43,25 +43,34 @@ namespace GryloscAppLauncher
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-
-            Program.localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            Program.appFolder = Path.Combine(Program.localAppDataPath, "Grylosc");
-            if (!Directory.Exists(Program.appFolder))
+            try {
+                Program.localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                Program.appFolder = Path.Combine(Program.localAppDataPath, "Grylosc");
+                if (!Directory.Exists(Program.appFolder))
+                {
+                    Directory.CreateDirectory(Program.appFolder);
+                    Directory.CreateDirectory($"{Program.appFolder}/rawd");
+                    Directory.CreateDirectory($"{Program.appFolder}/softs");
+                    File.WriteAllText(Path.Combine(Program.appFolder, "data.json"), "{\"Installed\":\"{}\"}");
+                }
+                else
+                {
+                    Program.data = JsonSerializer.Deserialize<Dictionary<string, string>>(
+                        File.ReadAllText(Path.Combine(Program.appFolder, "data.json"))
+                        ) ?? new Dictionary<string, string>();
+                    Program.softs = JsonSerializer.Deserialize<Dictionary<string, string>>(Program.data["Installed"])
+                        ?? new Dictionary<string, string>();
+                }
+                InitList();
+            } catch (Exception ex)
             {
-                Directory.CreateDirectory(Program.appFolder);
-                Directory.CreateDirectory($"{Program.appFolder}/rawd");
-                Directory.CreateDirectory($"{Program.appFolder}/softs");
-                File.WriteAllText(Path.Combine(Program.appFolder, "data.json"), "{\"Installed\":\"{}\"}");
+                if (MessageBox.Show($"例外が発生しました：{ex.ToString()}\nアプリデータをすべてリセットしますか？", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                {
+                    Directory.Delete(Program.appFolder, true);
+                    MessageBox.Show("AppDataを削除し、内部データをリセットしました。\nこれよりアプリケーションを終了します。", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                Application.Exit();
             }
-            else
-            {
-                Program.data = JsonSerializer.Deserialize<Dictionary<string, string>>(
-                    File.ReadAllText(Path.Combine(Program.appFolder, "data.json"))
-                    ) ?? new Dictionary<string, string>();
-                Program.softs = JsonSerializer.Deserialize<Dictionary<string, string>>(Program.data["Installed"])
-                    ?? new Dictionary<string, string>();
-            }
-            InitList();
         }
 
         private void AddSoftwareButton_Click(object sender, EventArgs e)

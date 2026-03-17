@@ -1,2 +1,16 @@
 # Grylosc Application Launcher
-This software can only be launched with Windows-X64.
+## 概要
+Grylosc のアプリケーション（ソフト）を簡単に管理するためのソフトです。
+
+## インストール方法
+リリースからインストーラーをダウンロードし、指示に従ってインストールするだけです。
+
+## ソフトの保存場所について
+AppData/local内のGryloscフォルダが自動生成され、そこに保存されます。
+完全削除するには、直接削除または”設定→リセット”を実行します。
+
+## Github API について
+このソフトは一部Github API を使用しております。
+これには60回/時間の制限があり、
+例外が発生する場合があります。
+ご了承ください。
