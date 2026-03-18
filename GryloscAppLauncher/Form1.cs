@@ -104,7 +104,7 @@ namespace GryloscAppLauncher
 
                 // 最新バージョンか否か確認
                 var handler = new HttpClientHandler();
-                handler.AllowAutoRedirect = false;
+                handler.AllowAutoRedirect = true;
                 using (HttpClient client = new HttpClient(handler))
                 {
                     client.DefaultRequestHeaders.Add("User-Agent", "GryloscLauncher");
@@ -117,7 +117,7 @@ namespace GryloscAppLauncher
                         request,
                         HttpCompletionOption.ResponseHeadersRead
                         );
-                    string location = responce.Headers.Location.ToString();
+                    string location = responce.RequestMessage.RequestUri.ToString();
                     string version = location.Split('/').Last();
                     if (version != Program.afterSofts[Program.afterSofts.Keys.ToList()[SoftListBox.SelectedIndex]])    // バージョンに相違があれば更新ボタンを表示する
                     {
@@ -222,7 +222,7 @@ namespace GryloscAppLauncher
                 string softname = Program.afterSofts[Program.afterSofts.Keys.ToList()[SoftListBox.SelectedIndex]];
                 Program.isInstalling = true;
                 var handler = new HttpClientHandler();
-                handler.AllowAutoRedirect = false;
+                handler.AllowAutoRedirect = true;
                 using var client = new HttpClient(handler);
                 client.DefaultRequestHeaders.Add("User-Agent", "GryloscLauncher");
                 string username = "Grylosc";
@@ -236,7 +236,7 @@ namespace GryloscAppLauncher
                     request,
                     HttpCompletionOption.ResponseHeadersRead
                     );
-                string location = responce.Headers.Location.ToString();
+                string location = responce.RequestMessage.RequestUri.ToString();
                 string version = location.Split('/').Last();
                 StatusText.Text = "ダウンロード中...";
                 string url = $"https://github.com/{username}/{softname}/releases/latest/download/{softname}-UnuseRuntime.zip";

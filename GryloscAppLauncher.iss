@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "GryloscAppLauncher"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.1.2"
 #define MyAppPublisher "Grylosc"
 #define MyAppURL "https://github.com/Grylosc/GryloscAppLauncher"
 #define MyAppExeName "GryloscAppLauncher.exe"
@@ -32,7 +32,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
-OutputBaseFilename=GryloscSetup110
+OutputBaseFilename=GryloscSetup112
 SolidCompression=yes
 WizardStyle=modern dynamic
 

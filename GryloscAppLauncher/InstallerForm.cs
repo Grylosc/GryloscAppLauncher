@@ -109,7 +109,7 @@ namespace GryloscAppLauncher
 
                 // アップデート確認
                 var handler = new HttpClientHandler();
-                handler.AllowAutoRedirect = false;
+                handler.AllowAutoRedirect = true;
                 using (var client = new HttpClient(handler))
                 {
                     string softname = repos[RepoListBox.SelectedIndex];
@@ -123,8 +123,19 @@ namespace GryloscAppLauncher
                         request,
                         HttpCompletionOption.ResponseHeadersRead
                         );
-                    string location = responce.Headers.Location.ToString();
-                    string version = location.Split('/').Last();
+                    string version;
+                    if (responce.RequestMessage.RequestUri != null)
+                    {
+                        version = responce.RequestMessage.RequestUri.ToString().Split('/').Last();
+                    }
+                    else if (responce.RequestMessage?.RequestUri != null)
+                    {
+                        version = responce.RequestMessage.RequestUri.Segments.Last().Trim('/');
+                    }
+                    else
+                    {
+                        version = "v1.0.0";
+                    }
                     if (Program.softs.ContainsKey(SoftTitle.Text))
                     {
                         if (version != Program.softs[repos[RepoListBox.SelectedIndex]])    // バージョンに相違があれば更新ボタンを表示する
@@ -166,7 +177,7 @@ namespace GryloscAppLauncher
                         string softname = repos[RepoListBox.SelectedIndex];
                         Program.isInstalling = true;
                         var handler = new HttpClientHandler();
-                        handler.AllowAutoRedirect = false;
+                        handler.AllowAutoRedirect = true;
                         using var client = new HttpClient(handler);
                         client.DefaultRequestHeaders.Add("User-Agent", "GryloscLauncher");
                         string username = "Grylosc";
@@ -180,7 +191,7 @@ namespace GryloscAppLauncher
                             request,
                             HttpCompletionOption.ResponseHeadersRead
                             );
-                        string location = responce.Headers.Location.ToString();
+                        string location = responce.RequestMessage.RequestUri.ToString();
                         string version = location.Split('/').Last();
                         StatusText.Text = "ダウンロード中...";
                         string url = $"https://github.com/{username}/{softname}/releases/latest/download/{softname}-UnuseRuntime.zip";
@@ -221,7 +232,7 @@ namespace GryloscAppLauncher
                         string softname = repos[RepoListBox.SelectedIndex];
                         Program.isInstalling = true;
                         var handler = new HttpClientHandler();
-                        handler.AllowAutoRedirect = false;
+                        handler.AllowAutoRedirect = true;
                         using var client = new HttpClient(handler);
                         client.DefaultRequestHeaders.Add("User-Agent", "GryloscLauncheer");
                         string username = "Grylosc";
@@ -235,12 +246,12 @@ namespace GryloscAppLauncher
                             request,
                             HttpCompletionOption.ResponseHeadersRead
                             );
-                        string location = responce.Headers.Location.ToString();
+                        string location = responce.RequestMessage.RequestUri.ToString();
                         string version = location.Split('/').Last();
                         StatusText.Text = "ダウンロード中...";
                         string url = $"https://github.com/{username}/{softname}/releases/latest/download/{softname}-UnuseRuntime.zip";
                         string downloadPath = $"{Program.appFolder}/rawd/download.zip";
-                        Debug.WriteLine($"{softname}をダウンロード中...\n   username: {username}\n  url: {url}\n    downloadPath: {downloadPath}");
+                        MessageBox.Show($"{softname}をダウンロード中...\n   username: {username}\n  url: {url}\n    downloadPath: {downloadPath}");
                         await File.WriteAllBytesAsync(
                             downloadPath,
                             await client.GetByteArrayAsync(url)
