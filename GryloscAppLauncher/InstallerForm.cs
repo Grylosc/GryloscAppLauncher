@@ -251,7 +251,7 @@ namespace GryloscAppLauncher
                         StatusText.Text = "ダウンロード中...";
                         string url = $"https://github.com/{username}/{softname}/releases/latest/download/{softname}-UnuseRuntime.zip";
                         string downloadPath = $"{Program.appFolder}/rawd/download.zip";
-                        MessageBox.Show($"{softname}をダウンロード中...\n   username: {username}\n  url: {url}\n    downloadPath: {downloadPath}");
+                        // MessageBox.Show($"{softname}をダウンロード中...\n   username: {username}\n  url: {url}\n    downloadPath: {downloadPath}");
                         await File.WriteAllBytesAsync(
                             downloadPath,
                             await client.GetByteArrayAsync(url)
